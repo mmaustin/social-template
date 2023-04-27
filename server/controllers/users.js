@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 
 export const getUser = async (req, res) => {
     try {
@@ -31,3 +31,6 @@ export const getUserFriends = async (req, res) => {
     }
 };
 
+export const addRemoveFriend = async (req, res) => {
+    res.status(200).send('added or removed')
+}
