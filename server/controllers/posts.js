@@ -38,9 +38,37 @@ export const getFeedPosts = async(req,res) => {
 }
 
 export const getUserPosts = async(req,res) => {
-    res.status(200).send('allowed');
+    try {
+        const {userId} = req.params;
+        const posts = await Post.find({userId});
+        res.status(200).json(posts)
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
 }
 
 export const likePost = async(req,res) => {
-    res.status(200).send('allowed');
+    try {
+        const {userId} = req.body;
+        const {id} = req.params;
+        const post = await Post.find({userId});
+        //Where does this key [0] come from!!??
+        const isLiked = post[0].likes.get(userId);
+
+        if(isLiked){
+            post[0].likes.delete(userId);
+        } else {
+            post[0].likes.set(userId, true);
+        }
+
+        const updatedPost = await Post.findByIdAndUpdate(
+            id,
+            {likes: post[0].likes},
+            {new: true}
+        );
+
+        res.status(200).json(updatedPost)
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }    
 }
