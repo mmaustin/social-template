@@ -3,7 +3,6 @@ import HomePage from "scenes/homepage";
 import LoginPage from "scenes/loginPage";
 import ProfilePage from "scenes/profilePage";
 
-
 function App() {
 
 
