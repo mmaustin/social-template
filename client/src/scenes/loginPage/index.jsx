@@ -1,4 +1,5 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import Form from './Form';
 
 
 const LoginPage = () => {
@@ -33,7 +34,7 @@ const LoginPage = () => {
         Welcome to Sociopedia
       </Typography>
     </Box>
-
+    <Form/>
   </Box>
 }
 export default LoginPage
