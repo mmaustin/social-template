@@ -126,6 +126,38 @@ const Form = () => {
                                 helperText={touched.occupation && errors.occupation}
                                 sx={{gridColumn: "span 4"}}
                             />
+                            <Box
+                                gridColumn="span 4"
+                                border={`1px solid ${palette.neutral.medium}`}
+                                borderRadius="5px"
+                                p="1rem"
+                            >
+                                <Dropzone
+                                    acceptedFiles=".jpg, .jpeg, .png"
+                                    multiple={false}
+                                    onDrop={(acceptedFiles) =>
+                                        setFieldValue("picture", acceptedFiles[0])
+                                    }
+                                >
+                                    {({getRootProps, getInputProps}) => (
+                                        <Box
+                                            {...getRootProps()}
+                                            border={`2px dashed ${palette.primary.mani}`}
+                                            p="1rem"
+                                            sx={{"&:hoover": {cursor: "pointer"}}}
+                                        >
+                                            <input {...getInputProps()} />
+                                            {!values.picture ? (
+                                                <p>Add Picture Here</p>
+                                            ) : (
+                                                <FlexBetween>
+                                                    <Typography>{values.picture.name}</Typography>
+                                                </FlexBetween>
+                                            )}
+                                        </Box>
+                                    )}
+                                </Dropzone>
+                            </Box>
                         </>
                     )}
                 </Box>
