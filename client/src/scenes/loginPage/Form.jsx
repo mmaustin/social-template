@@ -72,17 +72,36 @@ const Form = () => {
                 body: formData,
             }
         );
-        const savedUser = await savedUserResponse.join();
+        const savedUser = await savedUserResponse.json();
         onSubmitProps.resetForm();
         console.log(savedUser);
 
-        // if (savedUser){
-        //     setPageType("login");
-        // }
+        if (savedUser){
+            setPageType("login");
+        }
     };
 
     const login = async(values, onSubmitProps) => {
+        const loggedInResponse = await fetch(
+            "http://localhost:5001/auth/login",
+            {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(values),
+            }
+        );
+        const loggedIn = await loggedInResponse.json();
+        onSubmitProps.resetForm();
 
+        if(loggedIn){
+            dispatch(
+                setLogin({
+                    user: loggedIn.user,
+                    token: loggedIn.token,
+                })
+            );
+            navigate('/home');
+        }
     }
 
     const handleFormSubmit = async (values, onSubmitProps ) => {
