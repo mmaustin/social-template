@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   return <Box>
     <Box
-      width="1000%"
+      width="100%"
       backgroundColor={theme.palette.background.alt}
       p="1rem 6%"
       textAlign="center"
@@ -33,8 +33,8 @@ const LoginPage = () => {
       <Typography fontWeight="500" variant="h5" sx={{mb: "1.5rem"}} >
         Welcome to Sociopedia
       </Typography>
+      <Form/>
     </Box>
-    <Form/>
   </Box>
 }
 export default LoginPage
