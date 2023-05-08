@@ -27,7 +27,7 @@ const UserWidget = ({userId, picturePath}) => {
       method: 'GET',
       headers: {Authorization: `Bearer ${token}`},
     });
-    const data = response.json();
+    const data = await response.json();
     setUser(data);
   };
 
@@ -40,7 +40,7 @@ const UserWidget = ({userId, picturePath}) => {
   }
 
   const {firstName, lastName, location, occupation, viewedProfile, impressions, friends} = user;
-
+  
   return (
     <WidgetWrapper>
       {/* first row */}
@@ -67,8 +67,10 @@ const UserWidget = ({userId, picturePath}) => {
             </Typography>
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
-          <ManageAccountsOutlined/>
         </FlexBetween>
+        <ManageAccountsOutlined/>
+      </FlexBetween>
+
         <Divider/>
 
         {/* second row */}
@@ -82,6 +84,9 @@ const UserWidget = ({userId, picturePath}) => {
             <Typography color={medium}>{occupation}</Typography>
           </Box>
         </Box>
+
+        <Divider/>
+
         {/* third row */}
         <Box p="1rem 0">
           <FlexBetween mb="0.5rem">
@@ -97,6 +102,9 @@ const UserWidget = ({userId, picturePath}) => {
             </Typography>
           </FlexBetween>
         </Box>
+        
+        <Divider/>
+
         {/* fourth row */}
         <Box p="1rem 0">
           <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
@@ -127,9 +135,7 @@ const UserWidget = ({userId, picturePath}) => {
             </FlexBetween>
             <EditOutlined sx={{color: main}}/>
           </FlexBetween>
-
         </Box>
-      </FlexBetween>
     </WidgetWrapper>
   )
 }
