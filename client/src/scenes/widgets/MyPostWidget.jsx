@@ -8,7 +8,7 @@ import {
     MoreHorizOutlined
 } from "@mui/icons-material";
 
-import {Box, Divider, Typogrophy, InputBase, useTheme, Button, IconButton, useMediaQuery} from "@mui/material";
+import {Box, Divider, Typography, InputBase, useTheme, Button, IconButton, useMediaQuery} from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImageWidget";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -51,7 +51,61 @@ const MyPostWidget = ({picturePath}) => {
   }
 
   return (
-    <div>MyPostWidget</div>
+    <WidgetWrapper>
+      <FlexBetween gap='1.5rem'>
+        <UserImage image={picturePath} />
+        <InputBase
+          placeholder="What's on your mind . . . "
+          value={post}
+          onChange={(e)=> setPost(e.target.value)}
+          sx={{
+            width: "100%",
+            backgroundColor: palette.neutral.light,
+            borderRadius: "2rem",
+            padding: "1rem 2rem"
+          }}
+        />
+      </FlexBetween>
+      {isImage && (
+        <Box
+          border={`1px solid ${medium}`}
+          borderRadius="5pm"
+          mt="1rem"
+          p="1rem"
+        >
+          <Dropzone
+              acceptedFiles=".jpg, .jpeg, .png"
+              multiple={false}
+              onDrop={(acceptedFiles) =>
+                  setImage(acceptedFiles, acceptedFiles[0])
+              }
+          >
+              {({getRootProps, getInputProps}) => (
+                  <FlexBetween>
+                  <Box
+                      {...getRootProps()}
+                      border={`2px dashed ${palette.primary.mani}`}
+                      p="1rem"
+                      width="100%"
+                      sx={{"&:hoover": {cursor: "pointer"}}}
+                  >
+                      <input {...getInputProps()} />
+                      {!image ? (
+                          <p>Add Image Here</p>
+                      ) : (
+                          <FlexBetween>
+                              <Typography>{image.name}</Typography>
+                              <EditOutlined/>
+                          </FlexBetween>
+                      )}
+                  </Box>
+                  {/* START HERE TUESDAY */}
+                  </FlexBetween>
+              )}
+          </Dropzone>
+        </Box>
+      )}
+    </WidgetWrapper>
   )
 }
 export default MyPostWidget

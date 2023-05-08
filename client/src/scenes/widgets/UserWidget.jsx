@@ -1,7 +1,7 @@
 import {
   ManageAccountsOutlined,
   LocationOnOutlined,
-  WorkOutlineOutlined,
+  //WorkOutlineOutlined,
   EditOutlined
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
