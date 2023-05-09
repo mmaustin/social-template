@@ -35,8 +35,8 @@ const MyPostWidget = ({picturePath}) => {
     formData.append("userId", _id);
     formData.append("description", post);
     if(image){
-      formData.append("picture", image);
-      formData.append("picturePath", image.name);
+      formData.append("picture", image[0]);
+      formData.append("picturePath", image[0].name);
     }
 
     const response = await fetch(`http://localhost:5001/posts`, {
@@ -94,7 +94,7 @@ const MyPostWidget = ({picturePath}) => {
                           <p>Add Image Here</p>
                       ) : (
                           <FlexBetween>
-                              <Typography>{image.name}</Typography>
+                              <Typography>{image[0].name}</Typography>
                               <EditOutlined/>
                           </FlexBetween>
                       )}
