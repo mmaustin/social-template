@@ -52,7 +52,6 @@ export const likePost = async(req,res) => {
         const {userId} = req.body;
         const {id} = req.params;
         const post = await Post.find({userId});
-        console.log(post);
         //Where does this key [0] come from!!??
         //it comes from the fact that it would go to the front end as an array where we'd iterate over it
         //to display the post.  here, were not sending it to the front end but are working with it.  thus
