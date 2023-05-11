@@ -20,21 +20,20 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
-
+  
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
-  const {loggedInUserId} = useSelector(state => state.user._id);
+  const loggedInUserId = useSelector(state => state.user._id);
   const token = useSelector(state => state.token);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
-
   const {palette} = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
   const patchLike = async () => {
     const response = await fetch(`http://localhost:5001/posts/${postId}/like`,{
-      method: "UPDATE",
+      method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
