@@ -12,6 +12,9 @@ import UserWidget from "scenes/widgets/UserWidget";
 const ProfilePage = () => {
 
   const [user, setUser] = useState(null);
+  //the app component address must have the same /:idName as the
+  //parameter name we use to grab the id with useParams!!
+  //or you'll spend two hours trying to figure out what's the matter
   const {userId} = useParams();
   const token = useSelector(state => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -28,6 +31,8 @@ const ProfilePage = () => {
   useEffect(() => {
     getUser();
   }, []) //eslint-disable-line react-hooks/exhaustive-deps
+
+  if(!user) return null
 
   return (
     <Box>
