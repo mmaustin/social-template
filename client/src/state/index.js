@@ -33,7 +33,10 @@ export const authSlice = createSlice({
             state.posts = action.payload.posts;
         },
         setPost: (state, action) => {
-            console.log(action.payload.post);
+            //remember, the post is already in state.post. we're replacing
+            //that post with the payload post that has the updated likes info.
+            //if it's not the updated likes post, just return the post.
+            //i really confused myself with this simple operation!!!
             const updatedPosts = state.posts.map((post,i) => {
                 if(post._id === action.payload.post._id) return action.payload.post;
                 return post;
