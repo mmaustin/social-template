@@ -49,27 +49,22 @@ export const getUserPosts = async(req,res) => {
 
 export const likePost = async(req,res) => {
     try {
-        const {userId} = req.body;
         const {id} = req.params;
-        const post = await Post.find({userId});
-        //Where does this key [0] come from!!??
-        //it comes from the fact that it would go to the front end as an array where we'd iterate over it
-        //to display the post.  here, were not sending it to the front end but are working with it.  thus
-        //we need to get it out of the array first [0].
-        const isLiked = post[0].likes.get(userId);
+        const {userId} = req.body;
+        const post = await Post.findById(id);
+        const isLiked = post.likes.get(userId);
 
         if(isLiked){
-            post[0].likes.delete(userId);
+            post.likes.delete(userId);
         } else {
-            post[0].likes.set(userId, true);
+            post.likes.set(userId, true);
         }
 
         const updatedPost = await Post.findByIdAndUpdate(
             id,
-            {likes: post[0].likes},
+            {likes: post.likes},
             {new: true}
         );
-
         res.status(200).json(updatedPost)
     } catch (error) {
         res.status(404).json({message: error.message});

@@ -16,8 +16,9 @@ const FriendsListWidget = ({userId}) => {
   const getFriends = async () => {
     const response = await fetch(
       `http://localhost:5001/users/${userId}/friends`,
-       { method: "GET",
-        Authoriaation: `Bearer ${token}`
+       {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}`},
       }
     );
     const data = await response.json();
@@ -43,7 +44,7 @@ const FriendsListWidget = ({userId}) => {
           <Friend
             key={friend._id}
             friendId={friend._id}
-            name={`${friend.fristName} ${friend.lastName}`}
+            name={`${friend.firstName} ${friend.lastName}`}
             subtitle={friend.occupation}
             userPicturePath={friend.picturePath}
           />
