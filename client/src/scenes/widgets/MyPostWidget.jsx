@@ -15,7 +15,9 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "state";
+import { setUsersPosts } from "state";
+//import { setPosts } from "state";
+
 
 const MyPostWidget = ({picturePath}) => {
 
@@ -45,7 +47,7 @@ const MyPostWidget = ({picturePath}) => {
       body: formData,
     });
     const posts = await response.json();
-    dispatch(setPosts({posts}));
+    dispatch(setUsersPosts({posts, _id}));
     setImage(null);
     setPost("")
   }

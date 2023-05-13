@@ -42,10 +42,13 @@ export const authSlice = createSlice({
                 return post;
             });
             state.posts = updatedPosts;
-            console.log(updatedPosts);
+        },
+        setUsersPosts: (state, action) => {
+            const userPosts = action.payload.posts.filter((post) => post.userId === action.payload._id);
+            state.posts = userPosts;
         }
     }
 })
 
-export const {setMode, setLogin, setLogout, setFriends, setPosts, setPost} = authSlice.actions;
+export const {setMode, setLogin, setLogout, setFriends, setPosts, setPost, setUsersPosts} = authSlice.actions;
 export default authSlice.reducer;
