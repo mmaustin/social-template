@@ -37,7 +37,7 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
     const data = await response.json();
     dispatch(setFriends({friends: data}))
   }
-
+  
   return (
     <FlexBetween>
       <FlexBetween gap='1rem'>
@@ -66,7 +66,8 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
           </Typography>
         </Box>
       </FlexBetween>
-      <IconButton
+      { friendId === _id ? ('') :
+      (<IconButton
         onClick={() => patchFriend()}
         sx={{backgroundColor: primaryLight, p: "0.6rem"}}
       >
@@ -74,6 +75,7 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
           <PersonRemoveOutlined sx={{color: primaryDark}} />
         ) : <PersonAddOutlined sx={{color: primaryDark}} />}
       </IconButton>
+      )}
     </FlexBetween>
   )
 }

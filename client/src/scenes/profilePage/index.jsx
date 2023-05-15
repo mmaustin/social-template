@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "scenes/navbar";
 import FriendsListWidget from "scenes/widgets/FriendsListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
@@ -11,12 +11,14 @@ import UserWidget from "scenes/widgets/UserWidget";
 
 const ProfilePage = () => {
 
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   //the app component address must have the same /:idName as the
   //parameter name we use to grab the id with useParams!!
   //or you'll spend two hours trying to figure out what's the matter
   const {userId} = useParams();
   const token = useSelector(state => state.token);
+  const {_id} = useSelector(state => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
@@ -29,12 +31,18 @@ const ProfilePage = () => {
   }
 
   useEffect(() => {
-    getUser();
+    if(userId === _id){
+      getUser();
+    } else {
+      navigate('/home');
+    }
   }, []) //eslint-disable-line react-hooks/exhaustive-deps
 
   if(!user) return null
 
   return (
+    <>
+     
     <Box>
       <Navbar/>
       <Box
@@ -53,12 +61,13 @@ const ProfilePage = () => {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={user.picturePath} />
+          { userId === _id ? (<MyPostWidget picturePath={user.picturePath} /> ): ('there\'s nothing to see here')}
           <Box m='2rem 0'/>
           <PostsWidgets userId={userId} isProfile/>
         </Box>
       </Box>      
-    </Box>
+    </Box> 
+    </>
   )
 }
 
