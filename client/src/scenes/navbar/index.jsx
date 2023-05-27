@@ -29,7 +29,7 @@ const Navbar = () => {
         <Typography
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
-          color="primary"
+          color="secondary"
           onClick={()=> navigate('/home')}
           sx={{
             "&:hoover": {
