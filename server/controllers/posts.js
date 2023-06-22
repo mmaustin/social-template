@@ -29,9 +29,13 @@ export const createPost = async(req, res) => {
 
 export const getFeedPosts = async(req,res) => {
     try {
-        const posts = await Post.find();
 
-        res.status(200).json(posts);        
+        let limit = 5;
+        let skip = 2;
+
+        const posts = await Post.find().skip(skip).limit(limit)
+
+        res.status(200).json({posts, length: posts.length});        
     } catch (error) {
         res.status(404).json({message: error.message})
     }

@@ -38,7 +38,7 @@ const HomePage = () => {
           <AdvertWidget/>
           <Box m='2rem 0' />
           <FriendsListWidget userId={_id}/>
-          </Box>}
+        </Box>}
       </Box>
     </Box>
   )
