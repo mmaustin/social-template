@@ -6,7 +6,9 @@ import PostWidget from "./PostWidget";
 const PostsWidgets = ({userId, isProfile}) => {
 
   const dispatch = useDispatch();
-  const posts = useSelector(state => state.posts);
+  const objectposts = useSelector(state => state.posts);
+  //const {posts} = objectposts;
+  console.log(objectposts);
   const token = useSelector(state => state.token);
 
   const getPosts = async () => {
@@ -15,7 +17,8 @@ const PostsWidgets = ({userId, isProfile}) => {
       headers: {Authorization: `Bearer ${token}`}
     });
     const data = await response.json();
-    dispatch(setPosts({posts: data}));
+    //console.log(data);
+    dispatch(setPosts({posts: data.posts}));
   }
 
   const getUserPosts = async () => {
@@ -24,7 +27,7 @@ const PostsWidgets = ({userId, isProfile}) => {
       headers: {Authorization: `Bearer ${token}`}
     });
     const data = await response.json();
-    dispatch(setPosts({posts: data}));
+    dispatch(setPosts({posts: data.posts}));
   }
 
   useEffect(() => {
@@ -37,7 +40,7 @@ const PostsWidgets = ({userId, isProfile}) => {
 
   return (
     <>
-      {posts.map(({
+      {objectposts.map(({
         _id, userId, firstName, lastName, description, location,
         picturePath, userPicturePath, likes, comments
       }) => (
