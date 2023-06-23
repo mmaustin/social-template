@@ -4,7 +4,9 @@ const initialState = {
     mode: 'light',
     user: null,
     token: null,
-    posts: []
+    posts: [],
+    totalPosts: 0,
+    numOfPages: 0,
 };
 
 export const authSlice = createSlice({
@@ -31,6 +33,8 @@ export const authSlice = createSlice({
         },
         setPosts: (state, action)=>{
             state.posts = action.payload.posts;
+            state.totalPosts = action.payload.totalPosts;
+            state.numOfPages = action.payload.numOfPages;            
         },
         setPost: (state, action) => {
             //remember, the post is already in state.post. we're replacing

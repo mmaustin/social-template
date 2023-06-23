@@ -8,7 +8,7 @@ const PostsWidgets = ({userId, isProfile}) => {
   const dispatch = useDispatch();
   const objectposts = useSelector(state => state.posts);
   //const {posts} = objectposts;
-  console.log(objectposts);
+  //console.log(objectposts);
   const token = useSelector(state => state.token);
 
   const getPosts = async () => {
@@ -17,8 +17,9 @@ const PostsWidgets = ({userId, isProfile}) => {
       headers: {Authorization: `Bearer ${token}`}
     });
     const data = await response.json();
-    //console.log(data);
-    dispatch(setPosts({posts: data.posts}));
+    const {posts, totalPosts, numOfPages} = data;
+    //console.log(totalPosts, numOfPages);
+    dispatch(setPosts({posts: posts, totalPosts: totalPosts, numOfPages: numOfPages }));
   }
 
   const getUserPosts = async () => {
