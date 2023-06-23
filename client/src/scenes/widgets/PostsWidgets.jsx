@@ -2,11 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import PostWidget from "./PostWidget";
+import PageButtonWidget from "./PageButtonWidget";
+
 
 const PostsWidgets = ({userId, isProfile}) => {
 
   const dispatch = useDispatch();
   const objectposts = useSelector(state => state.posts);
+  const totalPosts = useSelector(state => state.totalPosts);
+  const numOfPages = useSelector(state => state.numOfPages)
   //const {posts} = objectposts;
   //console.log(objectposts);
   const token = useSelector(state => state.token);
@@ -58,6 +62,7 @@ const PostsWidgets = ({userId, isProfile}) => {
         comments={comments}
         />
       ))}
+      <PageButtonWidget totalPosts={totalPosts} numOfPages={numOfPages}/>
     </>
   )
 }
