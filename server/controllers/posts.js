@@ -34,9 +34,11 @@ export const getFeedPosts = async(req,res) => {
         const limit = Number(req.query.limit) || 10;
         const skip = (page -1) * limit;
 
-        const posts = await Post.find().skip(skip).limit(limit)
+        const posts = await Post.find().skip(skip).limit(limit);
+        const totalPosts = await Post.countDocuments(posts);
+        const numOfPages = Math.ceil(totalPosts / limit);
 
-        res.status(200).json({posts, length: posts.length});        
+        res.status(200).json({posts, totalPosts, numOfPages});        
     } catch (error) {
         res.status(404).json({message: error.message})
     }
