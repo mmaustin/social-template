@@ -12,6 +12,7 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
   })
 
   const [page, setPage] = useState(1);
+  console.log(page);
 
   const nextPage = () => {
     console.log('next page');
@@ -44,7 +45,7 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
                     bgcolor: 'pink' 
                   })
                 }}
-                onClick={() => console.log('change page')}
+                onClick={() => setPage(pageNumber)}
               >
               {pageNumber}
             </Button>
