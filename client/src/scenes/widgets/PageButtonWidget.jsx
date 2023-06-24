@@ -15,11 +15,19 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
   console.log(page);
 
   const nextPage = () => {
-    console.log('next page');
+    let newPage = page + 1;
+    if(newPage > numOfPages){
+      newPage = 1;
+    }
+    setPage(newPage);
   }
 
   const prevPage = () => {
-    console.log('prev page');
+    let newPage = page - 1;
+    if(newPage < 1){
+      newPage = numOfPages;
+    }
+    setPage(newPage);
   }
 
   return (
@@ -33,7 +41,7 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
           onClick={nextPage}
           sx={{color: 'blue', bgcolor: 'white'}}
         >
-          Prev Button
+          Next Button
         </Button>
         <Box >
           {pages.map((pageNumber, i) => {
@@ -55,7 +63,7 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
           onClick={prevPage}
           sx={{color: 'blue', bgcolor: 'white'}}
         >
-          Next Button
+          Prev Button
         </Button>
       </FlexBetween>  
     </WidgetWrapper>
