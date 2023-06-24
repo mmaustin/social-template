@@ -62,7 +62,9 @@ const PostsWidgets = ({userId, isProfile}) => {
         comments={comments}
         />
       ))}
-      <PageButtonWidget totalPosts={totalPosts} numOfPages={numOfPages}/>
+      { numOfPages > 1 && (
+        <PageButtonWidget totalPosts={totalPosts} numOfPages={numOfPages}/>
+      )}
     </>
   )
 }
