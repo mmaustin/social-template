@@ -7,7 +7,11 @@ import { useState } from "react";
 
 const PageButtonWidget = ({totalPosts, numOfPages}) => {
 
-  const [page, setPage] = useState(0);
+  const pages = Array.from({length: numOfPages}, (_, i) => {
+    return i + 1;
+  })
+
+  const [page, setPage] = useState(1);
 
   const nextPage = () => {
     console.log('next page');
@@ -23,19 +27,27 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
         <Typography>{totalPosts}</Typography>
         <Typography>{numOfPages}</Typography>
       </FlexBetween> */}
-      <Button
-        onClick={nextPage}
-        sx={{color: 'blue', bgcolor: 'white'}}
-      >
-        Prev Button
-      </Button>
-      <Box >buttons</Box>
-      <Button
-        onClick={nextPage}
-        sx={{color: 'blue', bgcolor: 'white'}}
-      >
-        Prev Button
-      </Button>
+      <FlexBetween>
+        <Button
+          onClick={nextPage}
+          sx={{color: 'blue', bgcolor: 'white'}}
+        >
+          Prev Button
+        </Button>
+        <Box >
+          {pages.map((pageNumber, i) => {
+            return <Button key={i} type='button'>
+              {pageNumber}
+            </Button>
+          })}
+        </Box>
+        <Button
+          onClick={prevPage}
+          sx={{color: 'blue', bgcolor: 'white'}}
+        >
+          Next Button
+        </Button>
+      </FlexBetween>  
     </WidgetWrapper>
   )
 }
