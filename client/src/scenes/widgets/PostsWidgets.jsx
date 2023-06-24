@@ -9,22 +9,23 @@ const PostsWidgets = ({userId, isProfile}) => {
 
   const dispatch = useDispatch();
   const objectposts = useSelector(state => state.posts);
+  //console.log(objectposts);
   const totalPosts = useSelector(state => state.totalPosts);
   const numOfPages = useSelector(state => state.numOfPages)
   //const {posts} = objectposts;
   //console.log(objectposts);
   const token = useSelector(state => state.token);
 
-  const getPosts = async () => {
-    const response = await fetch('http://localhost:5001/posts', {
-      method: "GET",
-      headers: {Authorization: `Bearer ${token}`}
-    });
-    const data = await response.json();
-    const {posts, totalPosts, numOfPages} = data;
-    //console.log(totalPosts, numOfPages);
-    dispatch(setPosts({posts: posts, totalPosts: totalPosts, numOfPages: numOfPages }));
-  }
+  // const getPosts = async () => {
+  //   const response = await fetch('http://localhost:5001/posts', {
+  //     method: "GET",
+  //     headers: {Authorization: `Bearer ${token}`}
+  //   });
+  //   const data = await response.json();
+  //   const {posts, totalPosts, numOfPages} = data;
+  //   //console.log(totalPosts, numOfPages);
+  //   dispatch(setPosts({posts: posts, totalPosts: totalPosts, numOfPages: numOfPages }));
+  // }
 
   const getUserPosts = async () => {
     const response = await fetch(`http://localhost:5001/posts/${userId}/posts`, {
@@ -32,15 +33,18 @@ const PostsWidgets = ({userId, isProfile}) => {
       headers: {Authorization: `Bearer ${token}`}
     });
     const data = await response.json();
-    dispatch(setPosts({posts: data.posts}));
+    const {posts, totalPosts, numOfPages} = data;
+    console.log(posts.length, totalPosts, numOfPages);
+    dispatch(setPosts({posts: posts, totalPosts: totalPosts, numOfPages: numOfPages}));
   }
 
   useEffect(() => {
     if(isProfile){
       getUserPosts();
-    } else {
-      getPosts();
-    }
+    } 
+    // else {
+    //   getPosts();
+    // }
   }, []) //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
