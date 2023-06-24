@@ -36,7 +36,16 @@ const PageButtonWidget = ({totalPosts, numOfPages}) => {
         </Button>
         <Box >
           {pages.map((pageNumber, i) => {
-            return <Button key={i} type='button'>
+            return <Button
+                key={i}
+                type='button'
+                sx={{color: 'blue', bgcolor: 'white',
+                  ...(pageNumber === page && {
+                    bgcolor: 'pink' 
+                  })
+                }}
+                onClick={() => console.log('change page')}
+              >
               {pageNumber}
             </Button>
           })}
